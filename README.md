@@ -1,13 +1,13 @@
 # Twitter Hashtag Analysis Using MapReduce
 
-## **Overview**
-This project processes and visualizes Twitter data using a MapReduce approach. The pipeline:
-1. **Maps** raw tweet data to structured JSON outputs (`map.py`).
-2. **Reduces** the structured data into summarized counts (`reduce.py`).
-3. **Visualizes** hashtag trends (`visualize.py`).
-4. **Generates alternative aggregated insights** (`alternative_reduce.py`).
+## **Project Overview**
+This mini project applies basic analysis on a **2.7 TB dataset** containing geotagged tweets, monitoring **coronavirus-related social media activity**. Using a **MapReduce** procedure, the primary goal of this project was to **parallelize data extraction for efficiency**.
 
-This implementation efficiently processes large-scale Twitter data using JSON files and generates meaningful insights on hashtag usage trends.
+Extracting the **country, language, and hashtags** from each tweet, I consolidate the data into **<50KB summarized JSON files**, then generate a series of visualizations using `visualize.py` and `alternative_reduce.py`.
+
+Below are the **Top 10 countries and languages for `#coronavirus` and `#코로나바이러스`**.  
+*(Note: MatPlotLib does not support Korean text, so the latter hashtag is not displayed in the image.)*  
+Also included is a **time series graph** showing the number of tweets for each hashtag over time.
 
 ---
 
