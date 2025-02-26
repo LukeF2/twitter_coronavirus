@@ -24,7 +24,7 @@ Below are the **Top 10 countries and languages for `#coronavirus` and `#코로�
 ![Top 10 Countries for #코로나바이러스](output/코로나바이러스_all_country.json.png)
 
 ### 🔹 **Hashtag Trends Over Time**
-This line chart shows the **daily number of tweets** containing `#coronavirus` and `#flu`, demonstrating social media trends over time.
+This line chart shows the daily number of tweets containing #coronavirus and #flu, demonstrating social media trends over time throughout 2020. The trend reflects how frequently each hashtag appeared over the course of the year.
 ![Hashtag Trends](output/hashtag_trend.png)
 
 ---
