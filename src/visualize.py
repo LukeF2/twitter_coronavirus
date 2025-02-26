@@ -3,26 +3,43 @@
 # command line args
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--input_path',required=True)
-parser.add_argument('--key',required=True)
-parser.add_argument('--percent',action='store_true')
+parser.add_argument('--input_path', required=True, help="Path to the JSON file")
+parser.add_argument('--key', required=True, help="Hashtag to visualize")
 args = parser.parse_args()
 
 # imports
-import os
 import json
-from collections import Counter,defaultdict
+import os
+import matplotlib.pyplot as plt
 
-# open the input path
-with open(args.input_path) as f:
-    counts = json.load(f)
+# Load the data from JSON file
+with open(args.input_path, 'r') as f:
+    data = json.load(f)
 
-# normalize the counts by the total values
-if args.percent:
-    for k in counts[args.key]:
-        counts[args.key][k] /= counts['_all'][k]
+# Extract the relevant hashtag data
+if args.key not in data:
+    print(f"Error: Hashtag '{args.key}' not found in {args.input_path}")
+    exit(1)
 
-# print the count values
-items = sorted(counts[args.key].items(), key=lambda item: (item[1],item[0]), reverse=True)
-for k,v in items:
-    print(k,':',v)
+hashtag_data = data[args.key]
+
+# Sort data from low to high and take top 10
+sorted_data = sorted(hashtag_data.items(), key=lambda x: x[1])[:10]
+keys, values = zip(*sorted_data)  # Unpack keys and values
+
+# Create a bar chart
+plt.figure(figsize=(10, 5))
+plt.barh(keys, values, color="skyblue")  # Horizontal bar chart
+plt.xlabel("Count")
+plt.ylabel("Keys")
+plt.title(f"Top 10 Counts for {args.key}")
+plt.grid(axis='x', linestyle="--", alpha=0.7)
+
+# Save the figure
+output_filename = f"output/{args.key.replace('#', '')}_{os.path.basename(args.input_path)}.png"
+plt.savefig(output_filename, bbox_inches="tight")
+print(f"Saved visualization to {output_filename}")
+
+# Show the plot (optional)
+# plt.show()
+
