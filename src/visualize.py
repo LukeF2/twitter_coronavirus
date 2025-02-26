@@ -23,17 +23,18 @@ if args.key not in data:
 
 hashtag_data = data[args.key]
 
-# Sort data from low to high and take top 10
-sorted_data = sorted(hashtag_data.items(), key=lambda x: x[1])[:10]
+# Sort data from high to low and take top 10
+sorted_data = sorted(hashtag_data.items(), key=lambda x: x[1], reverse=True)[:10]
 keys, values = zip(*sorted_data)  # Unpack keys and values
 
-# Create a bar chart
-plt.figure(figsize=(10, 5))
-plt.barh(keys, values, color="skyblue")  # Horizontal bar chart
-plt.xlabel("Count")
-plt.ylabel("Keys")
-plt.title(f"Top 10 Counts for {args.key}")
-plt.grid(axis='x', linestyle="--", alpha=0.7)
+# Create a vertical bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(keys, values, color="skyblue")
+plt.xlabel("Keys")
+plt.ylabel("Counts")
+plt.xticks(rotation=45)  # Rotate labels for readability
+plt.title(f"Top 10 keys for {args.key}")
+plt.grid(axis='y', linestyle="--", alpha=0.7)
 
 # Save the figure
 output_filename = f"output/{args.key.replace('#', '')}_{os.path.basename(args.input_path)}.png"
